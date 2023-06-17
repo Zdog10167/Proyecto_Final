@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import conexiones_BD_Ficheros.Ficheros;
 import excepciones.ClienteInvalidoException;
 import excepciones.TelefonoInvalidoException;
 
@@ -18,12 +19,12 @@ public class Cliente implements Serializable {
 	 */
 	private static final long serialVersionUID = -4411119939495580730L;
 	// Datos del cliente
-	String nombre;
-	String apellido;
-	String telefono;
-	String direccion;
-	String historial;
-	LocalDate fechaDeAlta;
+	public String nombre;
+	public String apellido;
+	public String telefono;
+	public String direccion;
+	public String historial;
+	public LocalDate fechaDeAlta;
 
 	boolean clienteValido;
 
@@ -32,9 +33,9 @@ public class Cliente implements Serializable {
 		sc.nextLine();
 		while (!clienteValido) {
 			try {
-				if (nombre == null) {
+				if (getNombre() == null) {
 					System.out.println("Nombre:");
-					nombre = sc.nextLine();
+					setNombre(sc.nextLine());
 				}
 				if (apellido == null) {
 					System.out.println("Apellido:");
@@ -65,6 +66,15 @@ public class Cliente implements Serializable {
 			fechaDeAlta = LocalDate.now();
 		}
 	}
+	
+	public Cliente (String nombre, String apellido, String telefono, String direccion, String historial, LocalDate fechaAlta) {
+		this.setNombre(nombre);
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.historial = historial;
+		this.fechaDeAlta = fechaAlta;
+	}
 
 	// Agregar historial al cliente, en caso de ser null lo convierte en ""
 	// TODO: Mejorar
@@ -82,9 +92,9 @@ public class Cliente implements Serializable {
 	}
 
 	public void mostrarCliente() {
-		System.out.println("\n\n\n Datos de " + nombre + ": \n");
+		System.out.println("\n\n\n Datos de " + getNombre() + ": \n");
 
-		System.out.println("Nombre: " + nombre);
+		System.out.println("Nombre: " + getNombre());
 		System.out.println("Apellido: " + apellido);
 		System.out.println("Teléfono: " + telefono);
 		System.out.println("Dirección: " + direccion);
@@ -121,7 +131,7 @@ public class Cliente implements Serializable {
 
 	// Método para comprobar que el cliente es válido, osea, que no tenga ningún hueco vacío
 	public void comprobarCliente() throws TelefonoInvalidoException {
-		if (isValid(nombre) && isValid(apellido) && formatoTelefonoValido() && isValid(direccion)) {
+		if (isValid(getNombre()) && isValid(apellido) && formatoTelefonoValido() && isValid(direccion)) {
 			clienteValido = true;
 		} else {
 			clienteValido = false;
@@ -144,5 +154,13 @@ public class Cliente implements Serializable {
 			}
 		}
 		return false;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 }

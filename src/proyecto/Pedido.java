@@ -17,7 +17,7 @@ public class Pedido {
 	public static void mostrarClientesPedido(ArrayList<Cliente> clientes) {
 		System.out.println("\n");
 		for (int i = 0; i < clientes.size(); i++) {
-			System.out.println("Cliente " + (i + 1) + " " + clientes.get(i).nombre + ": " + clientes.get(i).telefono);
+			System.out.println("Cliente " + (i + 1) + " " + clientes.get(i).getNombre() + ": " + clientes.get(i).telefono);
 		}
 	}
 

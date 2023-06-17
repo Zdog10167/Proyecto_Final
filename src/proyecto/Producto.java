@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import conexiones_BD_Ficheros.Ficheros;
 import excepciones.ProductoInvalidoException;
 
 public abstract class Producto implements Serializable {

@@ -16,7 +16,8 @@ public class Menus {
 	}
 	
 	// Menú inicial
-	public static boolean menuInicial(ArrayList<Cliente> clientes, ArrayList<Producto> productos, Scanner sc)
+	public static boolean menuInicial(ArrayList<Cliente> clientes, ArrayList<Cliente> clientesBD,
+			ArrayList<Producto> productos, ArrayList<Producto> productosBD, Scanner sc)
 			throws OpcionInvalidaException, InputMismatchException, ClienteInvalidoException {
 		int respuesta = 0;
 
@@ -30,11 +31,11 @@ public class Menus {
 		switch (respuesta) {
 
 		case 1: {
-			Menus.clientes(sc, clientes);
+			Menus.clientes(sc, clientes, clientesBD);
 		} break;
 
 		case 2: {
-			Menus.productos(sc, productos);
+			Menus.productos(sc, productos, productosBD);
 		} break;
 
 		case 3: {
@@ -51,7 +52,7 @@ public class Menus {
 	}
 
 	// Menú para manipulación de clientes
-	public static void clientes(Scanner sc, ArrayList<Cliente> clientes) {
+	public static void clientes(Scanner sc, ArrayList<Cliente> clientes, ArrayList<Cliente> clientesBD) {
 		terminar = false;
 		int respuesta;
 
@@ -67,7 +68,10 @@ public class Menus {
 				} break;
 
 				case 2: {
+					System.out.println("\nClientes en el fichero:");
 					Cliente.mostrarClientes(clientes);
+					System.out.println("\nClientes en la BD: ");
+					Cliente.mostrarClientes(clientesBD);
 				} break;
 
 				case 3: {
@@ -86,7 +90,7 @@ public class Menus {
 	}
 
 	// Menú para manipulación de productos
-	public static void productos(Scanner sc, ArrayList<Producto> productos) {
+	public static void productos(Scanner sc, ArrayList<Producto> productos, ArrayList<Producto> productosBD) {
 		terminar = false;
 		int respuesta;
 
@@ -110,7 +114,10 @@ public class Menus {
 				} break;
 
 				case 2: {
+					System.out.println("\n Productos en fichero: ");
 					Producto.mostrarProductos(productos);
+					System.out.println("\n Productos en la BD: ");
+					Producto.mostrarProductos(productosBD);
 				} break;
 
 				case 3: {
@@ -141,7 +148,7 @@ public class Menus {
 				System.out.println("Con qué cliente quieres realizar el pedido? Escriba el número del cliente correspondiente");
 				Pedido.mostrarClientesPedido(clientes);
 				clientePedido = clientes.get(sc.nextInt() - 1);
-				System.out.println("El pedido se realizará con el cliente " + clientePedido.nombre);
+				System.out.println("El pedido se realizará con el cliente " + clientePedido.getNombre());
 				terminar = true;
 			} catch (IndexOutOfBoundsException e) {
 				System.err.println("Error: Cliente inválido");

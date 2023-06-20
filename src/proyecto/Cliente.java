@@ -35,7 +35,7 @@ public class Cliente implements Serializable {
 			try {
 				if (getNombre() == null) {
 					System.out.println("Nombre:");
-					setNombre(sc.nextLine());
+					nombre = sc.nextLine();
 				}
 				if (apellido == null) {
 					System.out.println("Apellido:");
@@ -68,7 +68,7 @@ public class Cliente implements Serializable {
 	}
 	
 	public Cliente (String nombre, String apellido, String telefono, String direccion, String historial, LocalDate fechaAlta) {
-		this.setNombre(nombre);
+		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -160,7 +160,11 @@ public class Cliente implements Serializable {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getApellido() {
+		return apellido;
+	}
+
+	public String getTelefono() {
+		return telefono;
 	}
 }
